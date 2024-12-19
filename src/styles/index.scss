@@ -35,10 +35,16 @@ html, body, #app {
     color: var(--slate-12);
     font-family: "Nunito Sans", sans-serif;
     background-color: var(--slate-1);
+    scroll-behavior: smooth;
 }
 
 .page--container, 
 .router--container {
     height: 100%;
     width: 100%;
+}
+
+// Set default
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Domine", serif;
 }

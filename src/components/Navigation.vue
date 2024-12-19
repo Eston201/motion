@@ -103,12 +103,12 @@ nav {
             }
 
             &::before {
-                @include activeLine(-100%);
+                @include activeLine(-60%);
                 left: 0;
             }
 
             &::after {
-                @include activeLine(100%);
+                @include activeLine(60%);
                 right: 0;
             }
             

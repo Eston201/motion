@@ -52,10 +52,10 @@ function navBtnHandler() {
   border-radius: 4px;
   backdrop-filter: blur(14px);
   transition: transform 0.3s ease-out;
-  
+
   nav {
     opacity: 0;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.5s 0.2s ease-out;
   }
   
   &.open {
