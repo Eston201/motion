@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="428" height="155"><svg width="428" height="155" viewBox="0 0 428 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="30.2978" height="154.855" fill="#EDEEF0"></rect>
+<rect y="30.3" width="30.3" height="77" transform="rotate(-90 0 30.3)" fill="#EDEEF0"></rect>
+<rect x="50" width="30.2978" height="154.855" fill="#EDEEF0"></rect>
+<rect width="30.2978" height="154.855" transform="matrix(-1 0 0 1 237.298 0)" fill="#EDEEF0"></rect>
+<rect width="30.2978" height="154.855" transform="matrix(-1 0 0 1 353.298 0)" fill="#EDEEF0"></rect>
+<rect x="59" y="21.4238" width="30.2978" height="118.162" transform="rotate(-45 59 21.4238)" fill="#EDEEF0"></rect>
+<rect width="30.2978" height="118.162" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 227.977 21.4238)" fill="#EDEEF0"></rect>
+<circle cx="278.5" cy="134.5" r="20.5" fill="#B0B4BA"></circle>
+<path d="M351 155C371.422 155 391.007 146.835 405.447 132.301C419.888 117.767 428 98.0543 428 77.5C428 56.9457 419.888 37.2333 405.447 22.6992C391.007 8.16516 371.422 4.00207e-06 351 0L351 26.7328C364.377 26.7328 377.207 32.0814 386.666 41.6022C396.126 51.1229 401.44 64.0357 401.44 77.5C401.44 90.9643 396.126 103.877 386.666 113.398C377.207 122.919 364.377 128.267 351 128.267L351 155Z" fill="#EDEEF0"></path>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

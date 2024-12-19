@@ -2,7 +2,15 @@
     <div class="page--container home-page">
         <div class="home-header" ref="homeHeader">
             <h1>
-                <div class="letter" v-for="letter of 'Motion'">{{ letter }}</div>
+                <div
+                    v-for="letter of header"
+                    :class="[
+                        'letter',
+                        {'letter-space': (letter === ' ')}
+                    ]" 
+                >
+                    {{ letter }}
+                </div>
             </h1>
 
             <div class="overflow--p">
@@ -25,6 +33,7 @@ import { onMounted } from 'vue';
 import gsap from 'gsap';
 import { onBeforeRouteLeave } from 'vue-router';
 
+const header = "Motion Design";
 
 onBeforeRouteLeave(async () => {
     gsap.to('.circles--container', {
@@ -73,12 +82,23 @@ const enterAnimation = () => {
         scale: 2,
         opacity: 0,
         stagger: {
+            each: 0.4,
+        },
+        duration: 5
+    }, "<")
+    .fromTo('.circles--container .circle', {
+        scale: 0,
+        opacity: 1,
+    }, {
+        scale: 2,
+        opacity: 0,
+        stagger: {
             each: 0.9,
             ease: 'none',
             repeat: -1,
         },
         duration: 10
-    }, "<");
+    }, "<50%");
 }
 
 onMounted(() => {
@@ -109,8 +129,11 @@ onMounted(() => {
             .letter {
                 display: inline-block;
             }
+            .letter-space {
+                width: 20px;
+                height: 100%;
+            }
         }
-
 
         .overflow--p {
             overflow: hidden;
@@ -140,7 +163,7 @@ onMounted(() => {
             width: 60%;
             height: 70%;
 
-            background-color: var( --slate-2);
+            background-color: var( --slate-6);
             border: 2px solid var(--slate-11);
             border-radius: 50%;
             transform: scale(0);
