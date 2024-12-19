@@ -1,0 +1,44 @@
+@use './reset.scss';
+
+:root {
+    --nav-width: 200px;
+
+    // Font
+    --font-0: 18px;
+    --font-1: clamp(20px, 3vw, 25px);
+    --font-2: clamp(25px, 4vw, 30px);
+    --font-3: clamp(30px, 6vw, 35px);
+    --font-4: clamp(40px, 7vw, 56px);
+    --font-5: clamp(60px, 9vw, 80px);
+    --font-6: clamp(70px, 10vw, 90px);
+
+    // Colors
+    // https://www.radix-ui.com/colors/docs/palette-composition/scales
+    --slate-1: #111113;
+    --slate-2: #18191b;
+    --slate-3: #212225;
+    --slate-4: #272a2d;
+    --slate-5: #2e3135;
+    --slate-6: #363a3f;
+    --slate-7: #43484e;
+    --slate-8: #5a6169;
+    --slate-9: #696e77;
+    --slate-10: #777b84;
+    --slate-11: #b0b4ba;
+    --slate-12: #edeef0;
+}
+
+html, body, #app {
+    height: 100%;
+    width: 100%;
+
+    color: var(--slate-12);
+    font-family: "Nunito Sans", sans-serif;
+    background-color: var(--slate-1);
+}
+
+.page--container, 
+.router--container {
+    height: 100%;
+    width: 100%;
+}
