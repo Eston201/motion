@@ -1,133 +1,125 @@
 <template>
-    <nav class="navigation--container">
-        <button class="back" aria-label="route back" @click="() => onRoute('back')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-            </svg>
-        </button>
-        <div class="routes--container">
-            <div class="slider">
-                <div 
-                    v-for="(label, idx) of routes" 
-                    :key="label"
-                    :class="[
-                        'label',
-                        {'active' : currentActiveIndex == idx}
-                    ]"
-                >
-                    {{ label }}
-                </div>
+    <nav>
+        <img 
+            src="/favicon/favicon.svg" 
+            alt="Motion Design Logo"
+            @click="() => navigateTo('home')"
+        >
+        
+        <div class="nav-links__container">
+            <div
+                class="nav-link"
+                v-for="route of routes"
+                :key="route.label"
+                @click="() => navigateTo(route.routeName)"
+            >
+                <span :class="{'active' : route.routeName === activeRouteName}">
+                    {{ route.label }}
+                </span>
             </div>
         </div>
-
-        <button class="forward" aria-label="route forward" @click="() => onRoute('forward')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-            </svg>
-        </button>
     </nav>
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue';
-import gsap from 'gsap';
-import { onBeforeRouteLeave, useRouter } from 'vue-router';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useAppStore } from '../stores/appStore';
 
+const emit = defineEmits(['navClose'])
 const appStore = useAppStore();
-
 const router = useRouter();
 
+const activeRouteName = ref('');
 const routes = [
-    "",
-    "Home",
-    "Delay",
+    { label: 'Delay', routeName: 'delay' }
 ];
 
-const currentActiveIndex = ref(1);
-const translation = ref('0%');
-
-watch(currentActiveIndex, (newValue) => {
-    translation.value = `${-(100 / 3) * (newValue - 1)}%`;
-
-    gsap.to('.slider', {
-        x: translation.value,
-        ease: "back.out(1)",
-        duration: 0.7
-    });
-});
-
-function onRoute(direction) {
+function navigateTo(routeName) {
+    // Fast navigations are not allowed :(
     if (appStore.isRouting) return;
 
-    if (direction === "back") {
-        currentActiveIndex.value--;
-        if (currentActiveIndex.value < 1) return currentActiveIndex.value = 1;
-    }
-    else {
-        currentActiveIndex.value++;
-        if (currentActiveIndex.value > routes.length - 1) return currentActiveIndex.value = routes.length - 1;
-    }
-
     appStore.setIsRouting(true);
-    router.push({name: routes[currentActiveIndex.value].toLowerCase()});
+    activeRouteName.value = routeName;
+    router.push({name: routeName});
+    emit('navClose');
 }
 
 onMounted(() => {
     const currentRoute = window.location.pathname.replace('/', "");
-    if (currentRoute === "") currentActiveIndex.value = 1;
-    else {
-        const currentActiveRoute = routes.findIndex((r) => r.toLowerCase() === currentRoute);
-        currentActiveIndex.value = (currentActiveRoute === -1) ? 1 : currentActiveRoute;
-    }
+    activeRouteName.value = currentRoute;
 })
 </script>
 
 <style lang="scss" scoped>
-.navigation--container {
+nav {
     height: 100%;
-    
+
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding-inline: 8px;
-    overflow: hidden;
+    gap: 42px;
+    padding: 22px;
 
-    button {
-        color: var(--slate-12);
-        background-color: transparent;
-        border: none;
+    img {
+        width: 40%;
         cursor: pointer;
-
-        transition: transform 0.2s ease-out;
-
-        &.back:active {
-            transform: translateX(-6px);
-        }
-
-        &.forward:active {
-            transform: translateX(6px);
-        }
     }
 }
 
-.routes--container {
+.nav-links__container {
     flex: 1;
-    overflow: hidden;
-    
-    .slider {
-        display: flex;
-        justify-content: space-between;
+    width: 100%;
 
-        .label {
-            width: calc(100% / 3);
-            flex-shrink: 0;
-            text-align: center;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    .nav-link {
+        width: 100%;
+        position: relative;
+        font-size: 18px;
+        cursor: pointer;
+        text-align: center;
+
+        span {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+
+            // hover Animation setup
+            @mixin activeLine($x: 0) {
+                content: "";
+                position: absolute;
+                top: 50%;
+                transform: translate($x, -50%);
+
+                width: 25%;
+                height: 2px;
+                background-color: var(--slate-6);
+                border-radius: 4px;
+                transition: transform 0.2s ease-out;
+            }
+
+            &::before {
+                @include activeLine(-100%);
+                left: 0;
+            }
+
+            &::after {
+                @include activeLine(100%);
+                right: 0;
+            }
+            
+            &:hover {
+                &::before, &::after {
+                    transform: translateX(0);
+                }
+            }
+            // Active State
             &.active {
-                border-bottom-color: var(--slate-12);
+                &::before, &::after { transform: translateX(0); }
             }
         }
     }
