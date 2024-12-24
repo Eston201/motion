@@ -1,0 +1,35 @@
+@mixin genScroller(
+    $backgroundColor: var(--slate-2), 
+    $thumbBackground:  var(--slate-12), 
+    $hoverColor: var(--slate-11)
+) {
+    /* width */
+    &::-webkit-scrollbar {
+        width: 8px;
+
+        &:hover {
+            width: 10px;
+        }
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: $backgroundColor;
+        border-radius: 6px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: $thumbBackground;
+        border-radius: 6px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: $hoverColor;
+    }
+}
+
+@mixin scroller() {
+    @include genScroller();
+}

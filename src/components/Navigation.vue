@@ -119,7 +119,7 @@ nav {
             }
             // Active State
             &.active {
-                &::before, &::after { transform: translateX(0); }
+                &::before, &::after { transform: translateX(0); background-color: var(--slate-12);}
             }
         }
     }

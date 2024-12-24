@@ -3,8 +3,8 @@
   <div class="spa--container">
     <div class="nav--container" ref="navContainer">
       <button class="nav-btn" @click="navBtnHandler">
-        <span v-if="isNavClosed"><</span>
-        <span v-else>></span>
+        <span v-if="isNavClosed">></span>
+        <span v-else><</span>
       </button>
       <Navigation @navClose="navBtnHandler"/>
     </div>
@@ -16,9 +16,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { RouterView } from 'vue-router';
 import Navigation from './components/Navigation.vue';
+import gsap from 'gsap';
 
 const isNavClosed = ref(true);
 const navContainer = ref(null);
@@ -27,6 +28,17 @@ function navBtnHandler() {
   isNavClosed.value = !isNavClosed.value;
   navContainer.value.classList.toggle('open');
 }
+
+onMounted(() => {
+  const currentRoute = window.location.pathname.replace('/', "");
+  if (currentRoute === "") {
+    gsap.from('.nav-btn', {
+      x: "-=50%",
+      opacity: 0,
+      delay: 1
+    });
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -40,9 +52,9 @@ function navBtnHandler() {
 .nav--container {
   position: absolute;
   top: 5%;
-  right: 0;
+  left: 0;
   z-index: 1000;
-  transform: translateX(100%);
+  transform: translateX(-100%);
   
   width: 200px;
   height: 90%;
@@ -60,24 +72,24 @@ function navBtnHandler() {
   
   &.open {
     nav { opacity: 1; }
-    transform: translateX(-10%);
+    transform: translateX(10%);
     transition: transform 0.7s cubic-bezier(0.3, 1.5, 0.64, 1);
   }
 
   .nav-btn {
     position: absolute;
     top: 50%;
-    left: 0px;
+    right: 0px;
     z-index: -10;
-    transform: translate(-100%, -50%);
+    transform: translate(100%, -50%);
     
     height: 100px;
 
     color: var(--slate-1);
     background-color: var(--slate-12);
     border: 1px solid var(--slate-11);
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
     cursor: pointer;
   }
 }
