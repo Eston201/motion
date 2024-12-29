@@ -68,7 +68,7 @@ function onEnter(el, done) {
         y,
         opacity: 0,
         stagger: 0.2 * stagger,
-        duration: 1,
+        duration: 0.6,
     }, "<");
 }
 function onLeave(el, done) {
@@ -120,6 +120,7 @@ ul {
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
     }
 }
 
