@@ -177,6 +177,10 @@ section {
         border-bottom: 2px solid var(--slate-3);
     }
 
+    p {
+        margin-bottom: 22px;
+    }
+
     .hierarchy--container {
         height: 100%;
     }
