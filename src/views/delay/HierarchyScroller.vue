@@ -144,7 +144,7 @@ const createTimeLine = () => {
         scrollTrigger: {
             scroller: '.hierarchy-scroller',
             trigger: '.stats-section',
-            start: 'top 60%',
+            start: 'top 70%',
             end: 'bottom bottom',
             scrub: 1,
             // markers: true
@@ -157,8 +157,6 @@ const createTimeLine = () => {
     .from('.stats-section .icon--container', {
         y: "-=100%",
         opacity: 0,
-        ease: 'back.out(1.4)',
-        duration: 2
     }, "<50%")
     .from('.stats-section > .stats-grid > .stat-block', {
         scale: 0,
@@ -167,7 +165,8 @@ const createTimeLine = () => {
             amount: 0.5,
             grid: 'auto',
             from: 'random'
-        }
+        },
+        // duration: 2
     });
 }
 
