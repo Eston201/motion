@@ -3,6 +3,7 @@ import { useAppStore } from "../stores/appStore";
 
 const homePage = () => import('../views/home/Home.vue');
 const delayPage = () => import('../views/delay/Delay.vue');
+const hierarchyScrollerPage = () => import('../views/delay/HierarchyScroller.vue')
 
 const router = createRouter({
     history: createWebHistory(),
@@ -14,8 +15,14 @@ const router = createRouter({
         },
         {
             path: '/delay',
-            name: 'delay',
-            component: delayPage
+            component: delayPage,
+            children: [
+                {
+                    path: '',
+                    name: 'delay',
+                    component: hierarchyScrollerPage
+                }
+            ]
         },
     ]
 });

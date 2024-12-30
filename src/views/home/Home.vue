@@ -84,7 +84,7 @@ const enterAnimation = () => {
         stagger: {
             each: 0.4,
         },
-        duration: 5
+        duration: 8
     }, "<")
     .fromTo('.circles--container .circle', {
         scale: 0,
@@ -163,7 +163,7 @@ onMounted(() => {
             width: 60%;
             height: 70%;
 
-            background-color: var( --slate-6);
+            background-color: var( --slate-1);
             border: 2px solid var(--slate-11);
             border-radius: 50%;
             transform: scale(0);
